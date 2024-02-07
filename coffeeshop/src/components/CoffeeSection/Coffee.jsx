@@ -51,40 +51,36 @@ function Coffee() {
         ]
     };
     return (
-        <section className='p-10'>
-            <h1>Most popular</h1>
-
+        <section className='p-[1.5rem] bg-green-800 lg:p-10'>
+            <div>
+                <h1 className="text-white">Most popular</h1>
                 <Slider {...settings}>
-                    {
-                        productsList?.slice(3, 12).map((pro) => (
-                            <Card key={pro._id} {...pro} popular={true} />
-                        ))
-                    }
+                    {productsList?.slice(3, 12).map((pro) => (
+                        <Card key={pro._id} {...pro} popular={true} />
+                    ))}
                 </Slider>
-            <section className="w-full">
-
-                <h1>Products</h1>
-                <div className=" h-[80vh] grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-
-                    {
-                        currentProduct.map((products) => (
-                            <Card key={products._id} {...products} />
-                        ))
-                    }
+            </div>
+            <div className="w-full px-[100px] mt-10 flex flex-col items-center">
+                <h1 className="text-white">Products</h1>
+                <div className="w-full mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 px-6 lg:px-0">
+                    {currentProduct.map((products) => (
+                        <Card key={products._id} {...products} />
+                    ))}
                 </div>
-                <ul className="flex text-white gap-5 justify-center ">
+            </div>
+            <div className="mt-5">
+                <ul className="flex text-white gap-5 justify-center">
                     {Array.from({ length: Math.ceil(productsList.length / perPage) }).map((_, index) => (
-                        <li key={index} className="bg-slate-700 p-3 rounded-xl hover:opacity-90 transition-all ">
-                            <button onClick={() => paginate(index + 1)} className="outline-none">
+                        <li key={index} onClick={() => paginate(index + 1)} className="bg-slate-700 px-3 py-2 rounded-xl hover:opacity-90 transition-all ">
+                            <button className="outline-none">
                                 {index + 1}
                             </button>
                         </li>
                     ))}
                 </ul>
-            </section>
-
+            </div>
         </section>
     )
 }
 
-export default Coffee
+export default Coffee;
