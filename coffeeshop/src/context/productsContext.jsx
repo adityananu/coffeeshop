@@ -1,47 +1,89 @@
-import React, { createContext, useEffect, useState, useMemo } from 'react';
-import axios from 'axios';
-import { api } from '../api/api';
+import React, { createContext, useEffect, useState, useMemo } from "react";
+import axios from "axios";
+import { api } from "../api/api";
 
 const ProductContext = createContext();
 
 function ProductsContext({ children }) {
-    const [cartArray, setCartArray] = useState([]);
-    const [productsList, setProductsList] = useState([]);
+  const [cartArray, setCartArray] = useState([]);
+  const [productsList, setProductsList] = useState([]);
+  const [showPop, setShowPop] = useState(false);
+  const [popMessage, setPopMessage] = useState("");
 
-    useEffect(() => {
-        fetchProducts();
-    }, []);
+  useEffect(() => {
+    fetchProducts();
+  }, []);
 
-    const fetchProducts = async () => {
-        try {
-            const response = await axios.get(api);
-            setProductsList(response.data);
-        } catch (err) {
-            console.log(err);
-        }
-    };
-    const memoizedProductsList = useMemo(() => productsList, [productsList]);
-
-    const fetchSingleProduct = (id) => {
-        const singleProduct = memoizedProductsList.find((pro) => pro.id === id);
-        console.log(singleProduct);
+  const fetchProducts = async () => {
+    try {
+      const response = await axios.get(api);
+      setProductsList(response.data);
+    } catch (err) {
+      console.log(err);
     }
+  };
+  const memoizedProductsList = useMemo(() => productsList, [productsList]);
+  const fetchSingleProduct = (id) => {
+    const singleProduct = memoizedProductsList.find((pro) => pro.id === id);
+    console.log(singleProduct);
+  };
 
+  const addToCart = (id) => {
+    try {
+      const selectedProduct = memoizedProductsList.find(
+        (pro) => pro._id === id
+      );
+      const existingItemIndex = cartArray.findIndex((item) => item._id === id);
+      if (existingItemIndex !== -1) {
+        const updatedCart = [...cartArray];
+        updatedCart[existingItemIndex].quantity += 1;
+        setCartArray(updatedCart);
+      } else {
+        setCartArray([...cartArray, { ...selectedProduct, quantity: 1 }]);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
-    const addToCart = (id) => {
-        try {
-            const selectedProduct = memoizedProductsList.find((pro) => pro.id === id);
-            setCartArray([...cartArray, selectedProduct]);
-        } catch (err) {
-            console.log(err);
-        }
-    };
+  const popUpMessage = (message) => {
+    setShowPop(true);
+    setPopMessage(message);
+    setTimeout(() => {
+      setShowPop(false);
+      setPopMessage("");
+    }, 4000);
+  };
 
-    return (
-        <ProductContext.Provider value={{ productsList: memoizedProductsList, fetchProducts, addToCart ,fetchSingleProduct }}>
-            {children}
-        </ProductContext.Provider>
-    );
+  const removeFromCart = (id) => {
+    const updatedCart = cartArray.filter((item) => item._id !== id);
+    setCartArray(updatedCart);
+  };
+
+  const cartSubtotal = cartArray.reduce(
+    (acc, curr) => acc + curr.price * curr.quantity,
+    0
+  );
+
+  return (
+    <ProductContext.Provider
+      value={{
+        productsList: memoizedProductsList,
+        cartArray,
+        showPop,
+        popMessage,
+        popUpMessage,
+        setCartArray,
+        fetchProducts,
+        addToCart,
+        fetchSingleProduct,
+        removeFromCart,
+        cartSubtotal,
+      }}
+    >
+      {children}
+    </ProductContext.Provider>
+  );
 }
 
 export { ProductsContext, ProductContext };
