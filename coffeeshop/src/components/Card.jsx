@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
 import { motion } from "framer-motion";
-// import React, { useContext } from 'react';
-// import { ProductContext } from '../context/productsContext';
-// import { GiCoffeeCup } from "react-icons/gi";
+import React, { useContext } from 'react';
+import { ProductContext } from '../context/productsContext';
+import { GiCoffeeCup } from "react-icons/gi";
 
-function Card({ _id, name, image_url, popular }) {
-  // const { addToCart, popUpMessage } = useContext(ProductContext);
+function Card({ _id,price,name, image_url, popular, catalog }) {
+  const { addToCart, popUpMessage } = useContext(ProductContext);
 
   return (
     <>
@@ -59,12 +59,15 @@ function Card({ _id, name, image_url, popular }) {
                 <FaEye />
               </div>
             </Link>
-            {/* <div className='h-[3rem] border text-lg rounded-full flex justify-center items-center cursor-pointer hover:bg-[#E3EBFF]' onClick={() => {
-                            addToCart(_id);
-                            popUpMessage("Product added")
-                        }}>
-                            <GiCoffeeCup />
-                        </div> */}
+            {
+              catalog && (<div className='h-[3rem] border text-lg rounded-full flex justify-center items-center cursor-pointer hover:bg-[#E3EBFF]' onClick={() => {
+                addToCart(_id);
+                popUpMessage("Product added")
+              }}>
+                <GiCoffeeCup />
+              </div>)
+            }
+
           </div>
           <div className="overlay">
             {/* Display product name */}

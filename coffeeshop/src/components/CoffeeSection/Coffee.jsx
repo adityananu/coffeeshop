@@ -54,10 +54,11 @@ function Coffee() {
       },
     ],
   };
+
   return (
     <>
       {productsList && (
-        <section className=" p-[1.6rem] lg:p-10">
+        <section className="p-[1.6rem] lg:p-10">
           <div>
             <h1 className="text-2xl w-full text-center syne font-semibold underline mb-10 md:text-2.5xl lg:text-3xl">
               Most popular
@@ -68,7 +69,7 @@ function Coffee() {
               ))}
             </Slider>
           </div>
-          <div className="w-full bg-red-300 relative">
+          <div className="w-full bg-red-300 relative hidden md:block lg:block">
             <img
               src={coverImage}
               alt="coverCoffee"
@@ -84,7 +85,7 @@ function Coffee() {
             </motion.p>
           </div>
 
-          <div className="w-full flex flex-col items-center lg:p-[50px]">
+          <div className="w-full flex flex-col mt-10 items-center lg:p-[50px] lg:mt-3">
             <h1 className="text-2xl w-full text-center syne font-semibold mb-10 underline md:text-2.5xl lg:text-3xl">
               Products
             </h1>

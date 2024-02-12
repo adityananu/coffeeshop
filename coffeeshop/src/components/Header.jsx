@@ -27,9 +27,12 @@ function Header() {
         </Link>
       </div>
       <div>
-        <ul className="syne flex items-center gap-5 text-md outline-none font-semibold cursor-pointer md:text-xl">
-          <Link to="/">
+        <ul className="syne flex items-center gap-5 text-sm outline-none font-semibold cursor-pointer md:text-xl">
+          <Link to="/" className="hidden md:block">
             <p>Home</p>
+          </Link>
+          <Link to="/catalog">
+            <p>Catalog</p>
           </Link>
           <a href="https://github.com/adityananu/coffeeshop" target="_blank">
             Github
