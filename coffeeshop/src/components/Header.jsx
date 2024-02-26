@@ -12,7 +12,7 @@ function Header() {
       initial={{ y: "-150px" }}
       animate={{ y: "0" }}
       transition={{ ease: "linear", duration: "1" }}
-      className="w-full bg-transparent text-[#181716] flex justify-between items-center p-5 md:justify-center md:gap-[700px] md:py-2"
+      className="w-full bg-transparent text-[#181716] flex justify-between items-center gap-4 p-5 md:justify-center md:gap-[700px] md:py-2"
     >
       <div className="flex items-center">
         <img

@@ -5,7 +5,7 @@ import React, { useContext } from 'react';
 import { ProductContext } from '../context/productsContext';
 import { GiCoffeeCup } from "react-icons/gi";
 
-function Card({ _id,price,name, image_url, popular, catalog }) {
+function Card({ _id, price, name, image_url, popular, catalog }) {
   const { addToCart, popUpMessage } = useContext(ProductContext);
 
   return (
@@ -42,7 +42,7 @@ function Card({ _id,price,name, image_url, popular, catalog }) {
           initial={{ opacity: 0, y: 100 }}
           transition={{ duration: 1, ease: [0.65, 0, 0.35, 1] }}
           whileInView={{ opacity: 1, y: 0 }}
-          className="relative syne w-[295px] bg-[#FCFFFD] overflow-hidden shadow-lg rounded-lg my-auto md:w-[300px] lg:w-[350px]"
+          className={`relative syne w-[295px] bg-[#FCFFFD] ${catalog ? "mx-auto" : ""}  overflow-hidden shadow-lg rounded-lg my-auto md:w-[300px] lg:w-[350px]`}
         >
           <Link to={`/singleProduct/${_id}`}>
             <div>
@@ -60,12 +60,17 @@ function Card({ _id,price,name, image_url, popular, catalog }) {
               </div>
             </Link>
             {
-              catalog && (<div className='h-[3rem] border text-lg rounded-full flex justify-center items-center cursor-pointer hover:bg-[#E3EBFF]' onClick={() => {
-                addToCart(_id);
-                popUpMessage("Product added")
-              }}>
-                <GiCoffeeCup />
-              </div>)
+              catalog && (
+                <div className="flex flex-col gap-3">
+                  <div className='h-[3rem] border text-lg rounded-full flex justify-center items-center cursor-pointer hover:bg-[#E3EBFF]' onClick={() => {
+                    addToCart(_id);
+                    popUpMessage("Product added")
+                  }}>
+                    <GiCoffeeCup />
+                  </div>
+                  <div className="text-ml">${price}</div>
+                </div>
+              )
             }
 
           </div>
