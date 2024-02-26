@@ -5,14 +5,20 @@ import Card from "../../components/Card";
 
 function Catalog() {
   const { productsList } = useContext(ProductContext);
-  const [region, setRegion] = useState(""); 
-  const [grindOption, setGrindOption] = useState(""); 
+  const [region, setRegion] = useState("");
+  const [grindOption, setGrindOption] = useState("");
+  const [inputText, setInputText] = useState("");
   const [filteredProducts, setFilteredProducts] = useState([]);
   let catalog = true;
 
-
   useEffect(() => {
     let filtered = productsList;
+
+    if (inputText.trim() !== "") {
+      filtered = filtered.filter((product) =>
+        product.name.toLowerCase().includes(inputText.toLowerCase())
+      );
+    }
 
     if (region) {
       filtered = filtered.filter(
@@ -27,19 +33,22 @@ function Catalog() {
     }
 
     setFilteredProducts(filtered);
-  }, [region, grindOption, productsList]);
+  }, [region, inputText, grindOption, productsList]);
 
   const handleRegionChange = (event) => {
     setRegion(event.target.value);
   };
 
-
   const handleGrindChange = (event) => {
     setGrindOption(event.target.value);
   };
 
+  const handleInputText = (event) => {
+    setInputText(event.target.value);
+  };
+
   return (
-    <div className="mb-10">
+    <div className="pb-10 ">
       <Header />
       <div>
         {/* Filter options */}
@@ -47,6 +56,10 @@ function Catalog() {
           Filters
         </h1>
         <div className="syne px-10 py-5 flex gap-3 flex-col justify-evenly lg:flex-row">
+          <div>
+            <label htmlFor="inputText" className="text-xl">Search : </label>
+            <input type="text" name="inputText" onChange={handleInputText} className="bg-[#e5e7e9] outline-none rounded-md p-1 px-5" placeholder="Rainforest.."/>
+          </div>
           <div className="flex items-center gap-5">
             <h2 className="text-xl">Region</h2>
             <select
@@ -87,11 +100,17 @@ function Catalog() {
           <h1 className="text-2xl w-full text-center syne font-semibold mb-10 underline md:text-2.5xl lg:text-3xl">
             Products
           </h1>
-          <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 ">
-            {filteredProducts?.map((product) => (
-              <Card key={product._id} {...product} catalog={catalog} />
-            ))}
-          </div>
+          {filteredProducts.length === 0 ? (
+            <h1 className="text-3xl syne text-violet-500">
+              No Products found ...
+            </h1>
+          ) : (
+            <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-3 ">
+              {filteredProducts?.map((product) => (
+                <Card key={product._id} {...product} catalog={catalog} />
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>

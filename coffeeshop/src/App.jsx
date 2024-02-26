@@ -3,7 +3,7 @@ import Layout from "./components/Layout";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SingleProdcut from "./pages/SingleProdcut";
 import CartPage from "./pages/CartPage";
-import Catalog from "./pages/catalog/catalog";
+import Catalog from "./pages/catalog/Catalog";
 
 export default function App() {
   return (

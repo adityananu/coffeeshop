@@ -52,3 +52,17 @@ html {
   gap: 10px;
   transition: right 0.5s ease;
 }
+.shakeBottle {
+  animation-name: shake;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out; /* for smooth animation */
+}
+
+@keyframes shake {
+  0%   { transform: rotate(0deg); }
+  25%  { transform: rotate(-5deg) translateY(2px); }
+  50%  { transform: rotate(5deg) translateY(2px); }
+  75%  { transform: rotate(-5deg) translateY(2px); }
+  100% { transform: rotate(0deg); }
+}

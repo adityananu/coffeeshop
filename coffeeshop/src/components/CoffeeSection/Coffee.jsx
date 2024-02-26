@@ -25,7 +25,7 @@ function Coffee() {
     infinite: false,
     speed: 1000,
     slidesToShow: 4,
-    slidesToScroll: 2,
+    slidesToScroll: 3,
     initialSlide: 0,
     responsive: [
       {
@@ -58,7 +58,7 @@ function Coffee() {
   return (
     <>
       {productsList && (
-        <section className="p-[1.6rem] lg:p-10">
+        <section className="p-[1.6rem] lg:p-10 ">
           <div>
             <h1 className="text-2xl w-full text-center syne font-semibold underline mb-10 md:text-2.5xl lg:text-3xl">
               Most popular

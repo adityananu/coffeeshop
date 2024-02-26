@@ -7,8 +7,6 @@ const ProductContext = createContext();
 function ProductsContext({ children }) {
   const [cartArray, setCartArray] = useState([]);
   const [productsList, setProductsList] = useState([]);
-  const [showPop, setShowPop] = useState(false);
-  const [popMessage, setPopMessage] = useState("");
 
   useEffect(() => {
     fetchProducts();
@@ -46,15 +44,6 @@ function ProductsContext({ children }) {
     }
   };
 
-  const popUpMessage = (message) => {
-    setShowPop(true);
-    setPopMessage(message);
-    setTimeout(() => {
-      setShowPop(false);
-      setPopMessage("");
-    }, 4000);
-  };
-
   const removeFromCart = (id) => {
     const updatedCart = cartArray.filter((item) => item._id !== id);
     setCartArray(updatedCart);
@@ -70,9 +59,6 @@ function ProductsContext({ children }) {
       value={{
         productsList: memoizedProductsList,
         cartArray,
-        showPop,
-        popMessage,
-        popUpMessage,
         setCartArray,
         fetchProducts,
         addToCart,

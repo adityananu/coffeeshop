@@ -1,6 +1,9 @@
 import React, { useContext } from "react";
 import { ProductContext } from "../context/productsContext";
 import Header from "../components/Header";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { AiOutlineDelete } from "react-icons/ai";
 
 function CartPage() {
   const { cartArray, removeFromCart, cartSubtotal, addToCart, setCartArray } =
@@ -16,6 +19,7 @@ function CartPage() {
       const updatedCart = [...cartArray];
       if (updatedCart[existingItemIndex].quantity === 1) {
         removeFromCart(id);
+        toast('Product removed');
       } else {
         updatedCart[existingItemIndex].quantity -= 1;
         setCartArray(updatedCart);
@@ -26,6 +30,7 @@ function CartPage() {
   return (
     <>
       <Header />
+      <ToastContainer />
       <div className="container mx-auto py-8 px-5 ">
         <h1 className="text-3xl font-bold mb-4">Shopping Cart</h1>
         {cartArray.length > 0 ? (
@@ -60,10 +65,13 @@ function CartPage() {
                       </button>
                     </div>
                     <button
-                      onClick={() => removeFromCart(product._id)}
+                      onClick={() => {
+                        removeFromCart(product._id);
+                        toast.success('Product removed');
+                      }}
                       className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg"
                     >
-                      Remove
+                      <AiOutlineDelete className="text-xl"/>
                     </button>
                   </div>
                 </div>
