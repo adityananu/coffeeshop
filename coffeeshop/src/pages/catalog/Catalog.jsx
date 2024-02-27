@@ -57,7 +57,7 @@ function Catalog() {
         </h1>
         <div className="syne px-10 py-5 flex gap-3 flex-col justify-evenly lg:flex-row">
           <div>
-            <label htmlFor="inputText" className="text-xl">Search : </label>
+            <label htmlFor="inputText" className="text-xl">Search Coffee: </label>
             <input type="text" name="inputText" onChange={handleInputText} className="bg-[#e5e7e9] outline-none rounded-md p-1 px-5" placeholder="Rainforest.."/>
           </div>
           <div className="flex items-center gap-5">

@@ -29,12 +29,12 @@ function Header() {
       <div>
         <ul className="syne flex items-center gap-5 text-sm outline-none font-semibold cursor-pointer md:text-xl">
           <Link to="/" className="hidden md:block">
-            <p>Home</p>
+            <p className="hover:border-b-2">Home</p>
           </Link>
           <Link to="/catalog">
-            <p>Catalog</p>
+            <p className="hover:border-b-2">Products</p>
           </Link>
-          <a href="https://github.com/adityananu/coffeeshop" target="_blank">
+          <a href="https://github.com/adityananu/coffeeshop" target="_blank" className="hover:border-b-2">
             Github
           </a>
           <Link to="/cart">

@@ -89,7 +89,7 @@ function Coffee() {
             <h1 className="text-2xl w-full text-center syne font-semibold mb-10 underline md:text-2.5xl lg:text-3xl">
               Products
             </h1>
-            <div className="w-full mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 px-2 ">
+            <div className="w-full flex flex-wrap gap-4 px-7 lg:gap-[5rem]">
               {currentProduct.map((products) => (
                 <Card key={products._id} {...products} />
               ))}
