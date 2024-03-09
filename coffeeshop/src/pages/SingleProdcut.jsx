@@ -23,7 +23,7 @@ function SingleProduct() {
       <div>
         <Header />
       </div>
-      <div className="border lg:w-3/4 bg-white rounded-lg shadow-lg p-8 lg:mt-[90px]">
+      <div className="border lg:w-3/4 bg-white rounded-lg shadow-lg p-[1rem] lg:mt-[10px]">
         {product && (
           <div className="flex flex-col lg:flex-row items-start lg:items-center lg:gap-8">
             <div className="w-full lg:w-1/2 mb-6 lg:mb-0">
